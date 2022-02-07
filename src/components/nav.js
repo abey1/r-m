@@ -1,13 +1,15 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const Nav = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <ul className="nav nav-tabs" id="myTab" role="tablist">
         <li className="nav-item" role="presentation">
-          <button
-            className="nav-link"
+          <Button
+            onClick={() => navigate("/")}
+            className="nav-link active"
             id="home-tab"
             data-bs-toggle="tab"
             data-bs-target="#home"
@@ -16,11 +18,12 @@ const Nav = () => {
             aria-controls="home"
             aria-selected="false"
           >
-            Home
-          </button>
+            Characters
+          </Button>
         </li>
         <li className="nav-item" role="presentation">
-          <button
+          <Button
+            onClick={() => navigate("/episodes")}
             className="nav-link"
             id="profile-tab"
             data-bs-toggle="tab"
@@ -30,12 +33,13 @@ const Nav = () => {
             aria-controls="profile"
             aria-selected="false"
           >
-            Profile
-          </button>
+            Episodes
+          </Button>
         </li>
         <li className="nav-item" role="presentation">
-          <button
-            className="nav-link active"
+          <Button
+            onClick={() => navigate("/locations")}
+            className="nav-link"
             id="contact-tab"
             data-bs-toggle="tab"
             data-bs-target="#contact"
@@ -44,8 +48,8 @@ const Nav = () => {
             aria-controls="contact"
             aria-selected="true"
           >
-            Contact
-          </button>
+            Locations
+          </Button>
         </li>
       </ul>
     </div>
