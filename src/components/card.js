@@ -1,14 +1,21 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import SingleCharacter from "./singleCharacter";
 
 export default function MediaCard(character) {
   const { name, image, species, status, type } = character.character;
-  console.log(character);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -39,8 +46,15 @@ export default function MediaCard(character) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={handleOpen}>
+          Detail
+        </Button>
       </CardActions>
+      <SingleCharacter
+        character={character.character}
+        open={open}
+        handleClose={handleClose}
+      />
     </Card>
   );
 }

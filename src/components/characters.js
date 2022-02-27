@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import MediaCard from "./card";
+import BasicPagination from "./pagination";
+import Loading from "../loading";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
-  const getAllCharacters = async () => {
-    const data = await fetch("https://rickandmortyapi.com/api/character").then(
-      (res) => res.json()
-    );
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+  const getAll = async () => {
+    const data = await fetch(
+      "https://rickandmortyapi.com/api/character/?page=" + page
+    ).then((res) => res.json());
     setCharacters(data.results);
+    setLoading(false);
   };
   useEffect(() => {
-    getAllCharacters();
-  }, []);
-  return (
+    getAll();
+  }, [page]);
+  return loading ? (
+    <Loading />
+  ) : (
     <div style={{ margin: "50px" }} className="container">
       <div className="row">
         {characters.map((character) => {
@@ -26,6 +34,15 @@ const Characters = () => {
             </div>
           );
         })}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <BasicPagination pages={42} setPage={setPage} />
       </div>
     </div>
   );
